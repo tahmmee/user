@@ -16,6 +16,7 @@ import (
 	kitprometheus "github.com/go-kit/kit/metrics/prometheus"
 	"github.com/microservices-demo/user/api"
 	"github.com/microservices-demo/user/db"
+	"github.com/microservices-demo/user/db/couchbase"
 	"github.com/microservices-demo/user/db/mongodb"
 	stdopentracing "github.com/opentracing/opentracing-go"
 	zipkin "github.com/openzipkin/zipkin-go-opentracing"
@@ -45,6 +46,7 @@ func init() {
 	flag.StringVar(&zip, "zipkin", os.Getenv("ZIPKIN"), "Zipkin address")
 	flag.StringVar(&port, "port", "8084", "Port on which to run")
 	db.Register("mongodb", &mongodb.Mongo{})
+	db.Register("couchbase", &couchbase.Couchbase{})
 }
 
 func main() {
